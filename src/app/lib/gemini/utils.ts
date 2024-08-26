@@ -6,16 +6,8 @@ export const normalizeGeminiResponse = (response: string): string => {
   code = code
     .replace(/export\s+default\s+.*?;\s*/, '')
     .replace(/export\s+\{\s*.*?\s*\};\s*/, '');
-  const startIndex = code.indexOf('{');
-  const endIndex = code.lastIndexOf('}');
 
-  // Extract the string between the first '{' and last '}'
-  if (startIndex !== -1 && endIndex !== -1 && endIndex > startIndex) {
-    return code.substring(startIndex + 1, endIndex).trim();
-  }
-
-  // If no matching brackets found, return an empty string or handle it as needed
-  return '';
+  return code;
 };
 
 export const removeBackticksAndGetLanguage = (
@@ -32,7 +24,7 @@ export const removeBackticksAndGetLanguage = (
 };
 
 export const constantPrompts = [
-  `Don't use useState or any other hooks directly, always use them with 'React.' prefix.`,
   `Always use Material-UI components for building the UI.`,
   `Don't give any explanation, just generate code`,
+  `Always name the main component as "DynamicComponent"`,
 ];

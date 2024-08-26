@@ -18,11 +18,15 @@ export async function POST(req: NextRequest) {
 
     const result = await runAi(prompt);
     const data = result.text();
-    const normalizedData = normalizeGeminiResponse(data);
-    const rawData = removeBackticksAndGetLanguage(data);
 
+    const rawData = removeBackticksAndGetLanguage(data);
+    const normalizedData = normalizeGeminiResponse(rawData.code);
     return NextResponse.json(
-      { success: true, normalizedData, rawData },
+      {
+        success: true,
+        normalizedData,
+        rawData,
+      },
       { status: 200 }
     );
   } catch (error) {

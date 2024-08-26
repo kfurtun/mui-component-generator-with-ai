@@ -1,3 +1,6 @@
+import { muiComponents } from './muiComponents';
+import { reactComponents } from './reactComponents';
+
 export const htmlBase = (code: string) => {
   return `<html>
       <head>
@@ -5,29 +8,17 @@ export const htmlBase = (code: string) => {
         <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
         <script src="https://unpkg.com/@mui/material@5.0.0/umd/material-ui.development.js"></script>
         <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
       </head>
       <body>
         <div id="root"></div>
 
         <script type="text/babel">
-          const
-          {
-            colors,
-            CssBaseline,
-            ThemeProvider,
-            Typography,
-            Container,
-            createTheme,
-            Box,
-            SvgIcon,
-            Link,
-            Button,
-            Grid,
-            TextField
-          }
-          = MaterialUI; 
+       
+          ${muiComponents}
+          ${reactComponents}
 
-          const DynamicComponent = () =>{${code}};
+          ${code}
 
           const rootElement = document.getElementById('root'); const root =
           ReactDOM.createRoot(rootElement); root.render(
