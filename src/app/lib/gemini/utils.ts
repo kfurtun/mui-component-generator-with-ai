@@ -1,13 +1,15 @@
 export const normalizeGeminiResponse = (response: string): string => {
   // Step 1: Remove all import statements
-  let code = response.replace(/import\s+.*?;?\s*\n/g, '');
+  let code = response
+    .replace(/import\s+\{[^}]+\}\s+from\s+['"][^'"]+['"];\s*/gm, '')
+    .replace(/import\s+[\w\s,{}*]+from\s+['"][^'"]+['"];\s*/g, '');
 
   // Step 2: Remove all export statements
   code = code
     .replace(/export\s+default\s+.*?;\s*/, '')
     .replace(/export\s+\{\s*.*?\s*\};\s*/, '');
 
-  return code;
+  return code.trim();
 };
 
 export const removeBackticksAndGetLanguage = (
@@ -27,4 +29,5 @@ export const constantPrompts = [
   `Always use Material-UI components for building the UI.`,
   `Don't give any explanation, just generate code`,
   `Always name the main component as "DynamicComponent"`,
+  `Don't use any export statements`,
 ];

@@ -1,11 +1,16 @@
 import { htmlBase } from './htmlBase';
+import { type ImportsMap } from './extractImports';
 
 interface DynamicComponentRendererProps {
   code: string;
+  imports: ImportsMap;
 }
 
-const DynamicComponentRenderer = ({ code }: DynamicComponentRendererProps) => {
-  const srcDoc = htmlBase(code);
+const DynamicComponentRenderer = ({
+  code,
+  imports,
+}: DynamicComponentRendererProps) => {
+  const srcDoc = htmlBase(code, imports);
 
   return (
     <iframe
